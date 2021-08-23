@@ -1,26 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Location</title>
-</head>
-
-<body>
-    <form action="/adventures/<%=locus._id%>?_method=PUT" method="POST">
+    <% const locus=master.loc ;const characters=master.char; %>
+        <form class="needs-validation" action="/adventures/<%=locus._id%>?_method=PUT" method="POST" novalidate>
+            <div class="mb-3">
+                <label class="form-label" for="title">Session Name</label>
+                <div class="input-group">
+                    <input class="form-control" type="text" value="<%=locus.title %>" name="location[title]" id="title"
+                        required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please designate a Session Name.
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image">Image URL</label>
+                <input class="form-control" type="text" value="<%=locus.image %>" name="location[image]" id="image"
+                    required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please enter an image URL.
+                </div>
+            </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image">Pick Characters</label>
+                <select multiple="multiple" name="location[characters]" class="form-select multiple" size="6"
+                    aria-label="multiple select" required>
+                    <% for(let cha of characters) { %>
+                        <option <% for( let test of locus.characters) { if (cha===test) { %> selected <% }}%>
+                                valus="<%= cha %>">
+                                    <%= cha %>
+                        </option>
+                        <% }%>
+                </select>
+                <div class="valid-feedback">
+                    Characters Selected!
+                </div>
+                <div class="invalid-feedback">
+                    Was no one there?
+                </div>
+            </div>
+            <div class="mb-3">
+                <lable class="form-label" for="city">City</lable>
+                <input class="form-control" type="text" name="location[city]" value="<%=locus.city %>" id="city"
+                    placeholder="City and State" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Give us a location to sniff.
+                </div>
+            </div>
+            <div class="mb-3">
+                <lable class="form-label" for="session">Session Number</lable>
+                <input class="form-control" type="number" name="location[session]" value="<%=locus.session %>"
+                    id="session" placeholder="1" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Something serial for the Cockroach.
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary">Edit Current Session</button>
+            </div>
+        </form>
         <div>
-            <label for="title">Pack Name</label>
-            <input type="text" name="location[title]" id="title" value="<%=locus.title%>">
-            <lable for="city">City</lable>
-            <input type="text" name="location[city]" id="city" value="<%=locus.city%>">
-            <button>Edit Pack Location</button>
+            <a href="/adventures/<%= locus._id %>">Back to Location</a>
         </div>
-    </form>
-    <div>
-        <a href="/adventures/<%= locus._id %>">Back to Location</a>
-    </div>
-</body>
-
-</html>

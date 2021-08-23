@@ -1,24 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Location</title>
-</head>
-
-<body>
-    <form action="/adventures" method="POST">
-        <div>
-            <label for="title">Pack Name</label>
-            <input type="text" name="location[title]" id="title">
-            <lable for="city">City</lable>
-            <input type="text" name="location[city]" id="city" placeholder="City and State">
-            <button>Add Pack Location</button>
-        </div>
-    </form>
-
-</body>
-
-</html>
+<% layout('layouts/boilerplate') %>
+    <div class="container">
+        <h1 class="page-title">Add Session to the list:</h1>
+        <form class="needs-validation" action="/adventures" method="POST" novalidate>
+            <div class="mb-3">
+                <label class="form-label" for="title">Session Name</label>
+                <div class="input-group">
+                    <input class="form-control" type="text" name="location[title]" id="title" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please designate a Session Name.
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image">Image URL</label>
+                <input class="form-control" type="text" name="location[image]" id="image" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please enter an image URL.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image">Pick Characters</label>
+                <select multiple="multiple" name="location[characters]" class="form-select multiple" size="6"
+                    aria-label="multiple select" required>
+                    <% for(let cha of characters) { %>
+                        <option valus="<%= cha %>">
+                            <%= cha %>
+                        </option>
+                        <% }%>
+                </select>
+                <div class="valid-feedback">
+                    Characters Selected!
+                </div>
+                <div class="invalid-feedback">
+                    Was no one there?
+                </div>
+            </div>
+            <div class="mb-3">
+                <lable class="form-label" for="city">City</lable>
+                <input class="form-control" type="text" name="location[city]" id="city" placeholder="City and State"
+                    required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Give us a location to sniff.
+                </div>
+            </div>
+            <div class="mb-3">
+                <lable class="form-label" for="session">Session Number</lable>
+                <input class="form-control" type="number" name="location[session]" id="session" placeholder="1"
+                    required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Something serial for the Cockroach.
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary">Add New Session</button>
+            </div>
+        </form>
+    </div>

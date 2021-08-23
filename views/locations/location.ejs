@@ -1,27 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location - <%= locus.title %>
-    </title>
-</head>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h1>
+                    <%= locus.title %>
+                </h1>
 
-<body>
-    <h1>
-        <%= locus.title %>
-    </h1>
-    <h2>
-        <%= locus.city %>
-    </h2>
-    <p><a href="/adventures/<%= locus._id %>/edit">Edit this Pack</a></p>
+                <p>
+                    Session Number: <%=locus.session%> | Location: <%= locus.city %>
+                            <p>
+                                <hr>
+                            <h3>Characters in the Session:</h3>
+                            <ul>
+                                <% for (let cha of locus.characters ) { %>
+                                    <li>
+                                        <%= cha %>
+                                    </li>
+                                    <% } %>
+                            </ul>
+            </div>
+            <div class="col-6">
+                <img class="img-thumbnail rounded float-end " src="<%= locus.image %>">
+            </div>
+        </div>
+    </div>
+    <p><a href="/adventures/<%= locus._id %>/edit">Edit this Session</a></p>
     <p>
-    <form action="/adventures/<%=locus._id%>?_method=DELETE" method="POST"><button>Delete Location</button></form>
+    <form action="/adventures/<%=locus._id%>?_method=DELETE" method="POST"><button>Delete Session</button></form>
     </p>
     <p><a href='/adventures'>Go Back!</a></p>
-
-</body>
-
-</html>

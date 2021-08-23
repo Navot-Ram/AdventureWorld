@@ -1,27 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adventure World Locations</title>
-</head>
-
-<body>
     <h1>Adventure world Locations - List</h1>
-    <ul>
-        <% for (let location of loci) { %>
-            <li>
-                <a href="/adventures/<%= location.id %>">
-                    <%= location.title %>
-                </a>
-            </li>
-            <% } %>
-    </ul>
+    <div class="container">
+        <div class="row g-4">
+            <% for (let location of loci) { %>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-6">
+                                <img src="<%= location.image %> " style="max-width: 100%; object-fit: cover;"
+                                    class="image-thumbnail float-end">
+                            </div>
+                            <div class="col-6 d-flex flex-column justify-content-center">
+                                <h5 class="card-title">
+                                    <%= location.title %>
+
+                                </h5>
+                                <p class="card-text">
+                                    Session <%= location.session %> | <%= location.city %>
+                                </p>
+                                <a class="btn btn-primary" href="/adventures/<%= location.id %> ">View Session</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <% } %>
+        </div>
+    </div>
     <div>
         <a href="/adventures/new">Add Pack</a>
     </div>
-</body>
-
-</html>

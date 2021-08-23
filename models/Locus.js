@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 
 const LocusSchema = new Schema({
     title: String,
+    image: String,
     city: String,
+    characters: Array,
     session: Number,
     song: String,
     description: String,
