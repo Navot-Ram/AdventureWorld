@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Location</title>
+</head>
+
+<body>
+    <form action="/adventures/<%=locus._id%>?_method=PUT" method="POST">
+        <div>
+            <label for="title">Pack Name</label>
+            <input type="text" name="location[title]" id="title" value="<%=locus.title%>">
+            <lable for="city">City</lable>
+            <input type="text" name="location[city]" id="city" value="<%=locus.city%>">
+            <button>Edit Pack Location</button>
+        </div>
+    </form>
+    <div>
+        <a href="/adventures/<%= locus._id %>">Back to Location</a>
+    </div>
+</body>
+
+</html>

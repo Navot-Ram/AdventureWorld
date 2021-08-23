@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure World Locations</title>
+</head>
+
+<body>
+    <h1>Adventure world Locations - List</h1>
+    <ul>
+        <% for (let location of loci) { %>
+            <li>
+                <a href="/adventures/<%= location.id %>">
+                    <%= location.title %>
+                </a>
+            </li>
+            <% } %>
+    </ul>
+    <div>
+        <a href="/adventures/new">Add Pack</a>
+    </div>
+</body>
+
+</html>
