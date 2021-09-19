@@ -1,0 +1,64 @@
+/** Validation Callbacks
+const validateLocation = (req, res, next) => {
+    const { error } = locusSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+}
+const validateStory = (req, res, next) => {
+    const { error } = storyTestSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',');
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+}
+ */
+/** Adventure Routs 
+
+app.get('/adventures', catchAsync(async (req, res) => {
+    const loci = await Locus.find({});
+    res.render('./locations/index', { loci });
+}))
+
+app.get('/adventures/new', (req, res) => {
+    res.render('./locations/new', { characters });
+})
+
+app.post('/adventures', validateLocation, catchAsync(async (req, res) => {
+    const loci = new Locus(req.body.location);
+    await loci.save();
+    res.redirect(`/adventures/${loci._id}`)
+}))
+
+app.get('/adventures/:id', catchAsync(async (req, res) => {
+    const locus = await Locus.findById(req.params.id).populate('stories');
+    res.render('locations/location', { locus });
+}))
+
+app.get('/adventures/:id/edit', catchAsync(async (req, res) => {
+    const locus = await Locus.findById(req.params.id)
+    const master = {
+        loc: locus,
+        char: characters
+    }
+    res.render('locations/edit', { master });
+}))
+
+app.put('/adventures/:id', validateLocation, catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const loci = await Locus.findByIdAndUpdate(id, { ...req.body.location });
+    res.redirect(`/adventures/${loci._id}`)
+}))
+
+
+app.delete('/adventures/:id', catchAsync(async (req, res) => {
+    const { id } = req.params;
+    await Locus.findByIdAndDelete(id);
+    res.redirect('/adventures');
+}))
+*/

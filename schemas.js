@@ -10,3 +10,11 @@ module.exports.locusSchema = Joi.object({
     }).required()
 });
 
+
+module.exports.storyTestSchema = Joi.object({
+    story: Joi.object({
+        title: Joi.string().required().max(80),
+        rank: Joi.number().required(),
+        body: Joi.string().required().max(255),
+    }).required()
+});
