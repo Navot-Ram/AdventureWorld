@@ -16,43 +16,10 @@ router.post('/', isLoggedIn, validateLocation, catchAsync(locations.makeNewAdven
 
 router.get('/:id', catchAsync(locations.showAdventure))
 
-router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
-    const locus = await Locus.findById(req.params.id);
-    if (!locus) {
-        req.flash('error', 'No such place.');
-        return res.redirect('/adventures');
-    }
-    const master = {
-        loc: locus,
-        char: characters
-    }
-    res.render('locations/edit', { master });
-}))
+router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(locations.editAdventureForm))
 
-router.put('/:id', isLoggedIn, isAuthor, validateLocation, catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const loci = await Locus.findById(id);
-    if (!loci) {
-        req.flash('error', 'What is that place you speak of?');
-        return res.redirect(`/adventures/${loci._id}`)
-    }
-    const local = await Locus.findByIdAndUpdate(id, { ...req.body.location });
-    req.flash('success', 'Successfully updated your Adventure!');
-    res.redirect(`/adventures/${loci._id}`)
-}))
+router.put('/:id', isLoggedIn, isAuthor, validateLocation, catchAsync(locations.editAdventure))
 
-
-router.delete('/:id', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const loci = await Locus.findById(id);
-    if (!loci) {
-        req.flash('error', 'What is that place you speak of?');
-        return res.redirect(`/adventures/${loci._id}`)
-    }
-    await Locus.findByIdAndDelete(id);
-    req.flash('success', 'Stricken from the Records');
-    res.redirect('/adventures');
-}))
-
+router.delete('/:id', isLoggedIn, isAuthor, catchAsync(locations.removeAdventure))
 
 module.exports = router;

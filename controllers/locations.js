@@ -30,3 +30,40 @@ module.exports.showAdventure = async (req, res) => {
     }
     res.render('locations/location', { locus });
 }
+
+module.exports.editAdventureForm = async (req, res) => {
+    const locus = await Locus.findById(req.params.id);
+    if (!locus) {
+        req.flash('error', 'No such place.');
+        return res.redirect('/adventures');
+    }
+    const master = {
+        loc: locus,
+        char: characters
+    }
+    res.render('locations/edit', { master });
+}
+
+module.exports.editAdventure = async (req, res) => {
+    const { id } = req.params;
+    const loci = await Locus.findById(id);
+    if (!loci) {
+        req.flash('error', 'What is that place you speak of?');
+        return res.redirect(`/adventures/${loci._id}`)
+    }
+    const local = await Locus.findByIdAndUpdate(id, { ...req.body.location });
+    req.flash('success', 'Successfully updated your Adventure!');
+    res.redirect(`/adventures/${loci._id}`)
+}
+
+module.exports.removeAdventure = async (req, res) => {
+    const { id } = req.params;
+    const loci = await Locus.findById(id);
+    if (!loci) {
+        req.flash('error', 'What is that place you speak of?');
+        return res.redirect(`/adventures/${loci._id}`)
+    }
+    await Locus.findByIdAndDelete(id);
+    req.flash('success', 'Stricken from the Records');
+    res.redirect('/adventures');
+}
