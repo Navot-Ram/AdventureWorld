@@ -34,6 +34,7 @@ const seedDB = async () => {
         const random1000 = Math.floor(Math.random() * 1000);
         let randSession = getRandomInt(1, 71);
         const loci = new Locus({
+            author: '61462356dac5f77138a654ab',
             title: `${random_item(sessions)}`,
             session: randSession,
             image: 'https://source.unsplash.com/1600x900/?wolf,raven,forest,idaho',

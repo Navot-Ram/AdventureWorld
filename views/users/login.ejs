@@ -1,0 +1,29 @@
+<% layout('layouts/boilerplate') %>
+    <div class="container">
+        <h1 class="page-title">Login Pack Member</h1>
+        <form class="needs-validation" action="/login" method="POST" novalidate>
+            <div class="mb-3">
+                <label class="form-label" for="userName">Username</label>
+                <input class="form-control" type="text" id="username" name="username" required>
+                <div class="valid-feedback">
+                    Username Detected!
+                </div>
+                <div class="invalid-feedback">
+                    Username Missing!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" type="password" id="password" name="password" required>
+                <div class="valid-feedback">
+                    Password Validated
+                </div>
+                <div class="invalid-feedback">
+                    Password Missing
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success">Login User</button>
+            </div>
+        </form>
+    </div>
