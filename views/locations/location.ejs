@@ -53,11 +53,30 @@
                                     <form action="/adventures/<%=locus._id%>/stories" method="POST"
                                         class="needs-validation" novalidate>
                                         <div class="form-group my-3">
-                                            <label for="rank" class="form-label">Rank - <span
-                                                    id="rankDisplay">Fostern</span></label>
-                                            <input onchange="updateTextInput(this.value);" type="range"
-                                                name="story[rank]" class="form-range" id="rank" value="2" min="0"
-                                                step="1" max="5">
+                                            <!-- /* Bop */ -->
+                                            <fieldset class="starability-checkmark">
+                                                <legend>Rank:</legend>
+                                                <input type="radio" id="no-rate-checkmark" class="input-no-rate"
+                                                    name="story[rank]" value="0" checked aria-label="Whelp" />
+
+                                                <input type="radio" id="checkmark-rate1" name="story[rank]" value="1" />
+                                                <label for="checkmark-rate1" title="Cliath">Cliath</label>
+
+                                                <input type="radio" id="checkmark-rate2" name="story[rank]" value="2" />
+                                                <label for="checkmark-rate2" title="Fostern">Fostern</label>
+
+                                                <input type="radio" id="checkmark-rate3" name="story[rank]" value="3" />
+                                                <label for="checkmark-rate3" title="Adren">Adren</label>
+
+                                                <input type="radio" id="checkmark-rate4" name="story[rank]" value="4" />
+                                                <label for="checkmark-rate4" title="Athro">Athro</label>
+
+                                                <input type="radio" id="checkmark-rate5" name="story[rank]" value="5" />
+                                                <label for="checkmark-rate5" title="Elder">Elder</label>
+
+                                                <span class="starability-focus-ring"></span>
+                                            </fieldset>
+                                            <!-- /* End Bop */-->
                                         </div>
                                         <div class="form-group my-3">
                                             <label class="form-label" for="title">Title</label>

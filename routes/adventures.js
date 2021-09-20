@@ -1,25 +1,22 @@
 const express = require('express');
 const catchAsync = require('../utils/catchAsync');
-const methodOverride = require('method-override');
-const Locus = require('../models/Locus');
-const { characters } = require('../seeds/Sessions');
 const router = express.Router({ mergeParams: true });
 const { isLoggedIn, isAuthor, validateLocation } = require('../middleware');
 const locations = require('../controllers/locations');
 
 
-router.get('/', catchAsync(locations.index))
+router.route('/')
+    .get(catchAsync(locations.index))
+    .post(isLoggedIn, validateLocation, catchAsync(locations.makeNewAdventure))
 
 router.get('/new', isLoggedIn, locations.newAdventure)
 
-router.post('/', isLoggedIn, validateLocation, catchAsync(locations.makeNewAdventure))
+router.route('/:id')
+    .get(catchAsync(locations.showAdventure))
+    .put(isLoggedIn, isAuthor, validateLocation, catchAsync(locations.editAdventure))
+    .delete(isLoggedIn, isAuthor, catchAsync(locations.removeAdventure))
 
-router.get('/:id', catchAsync(locations.showAdventure))
 
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(locations.editAdventureForm))
-
-router.put('/:id', isLoggedIn, isAuthor, validateLocation, catchAsync(locations.editAdventure))
-
-router.delete('/:id', isLoggedIn, isAuthor, catchAsync(locations.removeAdventure))
 
 module.exports = router;

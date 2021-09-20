@@ -1,7 +1,7 @@
 const { locusSchema, storyTestSchema } = require('./schemas');
 const Locus = require('./models/Locus');
+const Story = require('./models/story');
 const ExpressError = require('./utils/ExpressError');
-
 
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -32,7 +32,6 @@ module.exports.isAuthor = async (req, res, next) => {
     next();
 }
 
-
 module.exports.isStoryAuth = async (req, res, next) => {
     const { id, storyId } = req.params;
     const story = await Story.findById(storyId);
@@ -42,6 +41,7 @@ module.exports.isStoryAuth = async (req, res, next) => {
     }
     next();
 }
+
 module.exports.validateStory = (req, res, next) => {
     const { error } = storyTestSchema.validate(req.body);
     if (error) {
