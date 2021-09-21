@@ -1,19 +1,23 @@
-const express = require('express');
-const path = require('path');
-const mongoose = require('mongoose');
-const ejsMate = require('ejs-mate');
-const session = require('express-session');
-const flash = require('connect-flash');
-const passport = require('passport');
-const LocalStartegy = require('passport-local');
-const User = require('./models/User');
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 
-const ExpressError = require('./utils/ExpressError');
-const methodOverride = require('method-override');
+const express = require('express')
+const path = require('path')
+const mongoose = require('mongoose')
+const ejsMate = require('ejs-mate')
+const session = require('express-session')
+const flash = require('connect-flash')
+const passport = require('passport')
+const LocalStartegy = require('passport-local')
+const User = require('./models/User')
 
-const userRoutes = require('./routes/users');
-const adventureRoutes = require('./routes/adventures');
-const storyeRoutes = require('./routes/stories');
+const ExpressError = require('./utils/ExpressError')
+const methodOverride = require('method-override')
+
+const userRoutes = require('./routes/users')
+const adventureRoutes = require('./routes/adventures')
+const storyeRoutes = require('./routes/stories')
 
 mongoose.connect('mongodb://localhost:27017/AdventureWorld', {
     useNewUrlParser: true,

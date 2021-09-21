@@ -30,14 +30,23 @@ function random_item(items) {
 
 const seedDB = async () => {
     await Locus.deleteMany({});
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 5; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
         let randSession = getRandomInt(1, 71);
         const loci = new Locus({
             author: '61462356dac5f77138a654ab',
             title: `${random_item(sessions)}`,
             session: randSession,
-            image: 'https://source.unsplash.com/1600x900/?wolf,raven,forest,idaho',
+            images: [
+                {
+                    url: 'https://res.cloudinary.com/ddduyaru0/image/upload/v1632213021/Adventures/jak5zqzrn8kn9spuy3od.jpg',
+                    filename: 'Adventures/jak5zqzrn8kn9spuy3od ',
+                },
+                {
+                    url: 'https://res.cloudinary.com/ddduyaru0/image/upload/v1632212257/Adventures/czjvkmtsmzyeqsebqiyx.jpg',
+                    filename: 'Adventures/czjvkmtsmzyeqsebqiyx',
+                }
+            ],
             city: `${cities[random1000].city}, ${cities[random1000].state}`,
             location: `${random_item(locations)}`,
             characters: [`${random_item(characters)}`, `${random_item(characters)}`, `${random_item(characters)}`, `${random_item(characters)}`, `${random_item(characters)}`],

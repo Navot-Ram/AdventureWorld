@@ -1,7 +1,8 @@
 <% layout('layouts/boilerplate') %>
 
     <% const locus=master.loc ;const characters=master.char; %>
-        <form class="needs-validation" action="/adventures/<%=locus._id%>?_method=PUT" method="POST" novalidate>
+        <form class="needs-validation" action="/adventures/<%=locus._id%>?_method=PUT" method="POST" novalidate
+            enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label" for="title">Session Name</label>
                 <div class="input-group">
@@ -16,16 +17,22 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="image">Image URL</label>
-                <input class="form-control" type="text" value="<%=locus.image %>" name="location[image]" id="image"
-                    required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-                <div class="invalid-feedback">
-                    Please enter an image URL.
-                </div>
+                <label for="images" class="form-label">Upload Images - Choose files</label>
+                <input class="form-control" type="file" id="images" name="location[image]" multiple>
             </div>
+            <div class="mb-3">
+                <div>
+                    <p>Check images to Remove Existing Images</p>
+                </div>
+                <% locus.images.forEach(function(img,i) { %>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="deleteImages[]" value="<%= img.filename %>"
+                            type="checkbox" id="inlineCheckbox<%= i %>" value="option<%= i %>">
+                        <label class="form-check-label" for="inlineCheckbox<%= i %>"><img src="<%= img.thumbnail %>"
+                                class="img-thumbnail" style="max-height: 150px; object-fit: cover;"
+                                alt="<%= img.filename %>"></label>
+                    </div>
+                    <% }) %>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="image">Pick Characters</label>

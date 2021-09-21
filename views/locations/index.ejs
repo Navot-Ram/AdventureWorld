@@ -7,8 +7,9 @@
                     <div class="card">
                         <div class="row">
                             <div class="col-6">
-                                <img src="<%= location.image %> " style="max-width: 100%; object-fit: cover;"
-                                    class="image-thumbnail float-end">
+                                <% for (let img of location.images) { %>
+                                    <img src="<%= img.url %> " class="card-img-top" alt="...">
+                                    <% break } %>
                             </div>
                             <div class="col-6 d-flex flex-column justify-content-center">
                                 <h5 class="card-title">
@@ -27,7 +28,4 @@
 
                 <% } %>
         </div>
-    </div>
-    <div>
-        <a href="/adventures/new">Add Pack</a>
     </div>

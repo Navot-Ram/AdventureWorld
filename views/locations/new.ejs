@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
     <div class="container">
         <h1 class="page-title">Add Session to the list:</h1>
-        <form class="needs-validation" action="/adventures" method="POST" novalidate>
+        <form action="/adventures" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label" for="title">Session Name</label>
                 <div class="input-group">
@@ -15,17 +15,11 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="image">Image URL</label>
-                <input class="form-control" type="text" name="location[image]" id="image" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-                <div class="invalid-feedback">
-                    Please enter an image URL.
-                </div>
+                <label for="images" class="form-label">Upload Images - Choose files</label>
+                <input class="form-control" type="file" id="images" name="location[image]" multiple>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="image">Pick Characters</label>
+                <label class="form-label" for="location[characters]">Pick Characters</label>
                 <select multiple="multiple" name="location[characters]" class="form-select multiple" size="6"
                     aria-label="multiple select" required>
                     <% for(let cha of characters) { %>
