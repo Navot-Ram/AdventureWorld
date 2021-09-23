@@ -30,13 +30,17 @@ function random_item(items) {
 
 const seedDB = async () => {
     await Locus.deleteMany({});
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 125; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
         let randSession = getRandomInt(1, 71);
         const loci = new Locus({
             author: '61462356dac5f77138a654ab',
             title: `${random_item(sessions)}`,
             session: randSession,
+            geometry: {
+                coordinates: [`${cities[random1000].longitude}`, `${cities[random1000].latitude}`],
+                type: 'Point'
+            },
             images: [
                 {
                     url: 'https://res.cloudinary.com/ddduyaru0/image/upload/v1632213021/Adventures/jak5zqzrn8kn9spuy3od.jpg',

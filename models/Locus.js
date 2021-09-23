@@ -13,6 +13,17 @@ const LocusSchema = new Schema({
     title: String,
     images: [ImageSchema],
     city: String,
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
     characters: Array,
     session: Number,
     song: String,

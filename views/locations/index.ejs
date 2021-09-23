@@ -1,6 +1,24 @@
 <% layout('layouts/boilerplate') %>
-    <h1>Adventure world Locations - List</h1>
-    <div class="container">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <div class="row">
+        <div id="theGreatMap" style="height: 500px; width: 100%; background-color: pink">
+        </div>
+    </div>
+    <div class="container my-4">
+        <h1>Adventure world Locations - List</h1>
         <div class="row g-4">
             <% for (let location of loci) { %>
                 <div class="col-md-6">
@@ -29,3 +47,7 @@
                 <% } %>
         </div>
     </div>
+    <script>
+        const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
+    </script>
+    <script src="/js/clusterMap.js"></script>

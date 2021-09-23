@@ -8,7 +8,7 @@ module.exports.locusSchema = Joi.object({
         city: Joi.string().required(),
         characters: Joi.array().min(1),
     }).required(),
-    deleteImages: Joi.array()
+    deleteImages: Joi.array(),
 });
 
 

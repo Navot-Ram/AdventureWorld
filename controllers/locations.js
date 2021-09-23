@@ -1,10 +1,9 @@
 const Locus = require('../models/Locus');
 const { characters } = require('../seeds/Sessions');
 const cloudinary = require('cloudinary').v2;
-
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapBoxToken = process.env.MAPBOX_TOKEN;
-mbxGeocoding({ accessToken: mapBoxToken });
+const geoCoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 module.exports.index = async (req, res) => {
     const loci = await Locus.find({});
@@ -15,7 +14,13 @@ module.exports.newAdventure = (req, res) => {
 }
 
 module.exports.makeNewAdventure = async (req, res, next) => {
+    const geoCode = await geoCoder.forwardGeocode({
+        query: req.body.location.city,
+        limit: 1,
+    }).send();
     const loci = new Locus(req.body.location);
+    loci.geometry = geoCode.body.features[0].geometry;
+    //console.log(geoCode.body.features[0].geometry);
     loci.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
     loci.author = req.user._id;
     await loci.save();

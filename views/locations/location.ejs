@@ -1,19 +1,29 @@
 <% layout('layouts/boilerplate') %>
+
+    <div id="suprema" data-suprema='<%= JSON.stringify(locus); %>'></div>
+    <script>
+        const mapToken = "<%- process.env.MAPBOX_TOKEN  %>";
+        const basic = document.querySelector('#suprema');
+        const local = basic.dataset.suprema;
+    </script>
     <% function getRank (val) { let val2=parseInt(val); if (val2===0) { return 'Whelp' ; } else if (val2===1) {
         return 'Cliath' ; } else if (val2===2) { return 'Fostern' ; } else if (val2===3) { return 'Adren' ; } else if
         (val2===4) { return 'Athro' ; } else if (val2===5) { return 'Elder' ; } else { return 'Wut?' } } ; %>
-
         <div class="container mb-5">
+
+            <h1>
+                <%= locus.title %>
+            </h1>
             <div class="row justify-content-md-center">
                 <div class="col-6">
-                    <h1>
-                        <%= locus.title %>
-                    </h1>
-                    <div id="locationCrousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
+
+                    <div id="locationCrousel" class="carousel slide" style="max-height: 400px;" data-bs-ride="carousel">
+                        <div class="carousel-inner" style="background-color: #999999">
                             <% locus.images.forEach((img, i)=> { %>
-                                <div class="carousel-item <%if (i===0) { %> active  <% }  %> ">
-                                    <img src="<%= img.url %> " class="d-block w-100" alt="<%= img.filename %> ">
+                                <div style="max-height: 400px;"
+                                    class="carousel-item <%if (i===0) { %> active  <% }  %> ">
+                                    <img style="object-fit: contain; max-height: 400px; width: auto;"
+                                        src="<%= img.url %> " class="d-block w-100" alt="<%= img.filename %> ">
                                 </div>
                                 <% }) %>
                         </div>
@@ -46,6 +56,7 @@
                                 </ul>
                 </div>
                 <div class="col-6">
+                    <div id="locationMap" style="min-height: 400px;"></div>
                     <h3>Current Stories:</h3>
                     <%for(let story of locus.stories) { %>
                         <div class="card">
@@ -131,7 +142,8 @@
                                             </div>
                                             <% } %>
                                                 <div class="col-4 d-flex justify-content-center"><a class="btn btn-dark"
-                                                        href='/adventures'>Go Back!</a></div>
+                                                        href='/adventures'>Go Back!</a>
+                                                </div>
 
                                     </div>
 
@@ -140,3 +152,4 @@
             </div>
 
         </div>
+        <script src="/js/showMap.js"></script>"
